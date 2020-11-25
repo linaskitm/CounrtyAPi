@@ -13,7 +13,7 @@
       
           <div class="input-group">
             <select class="custom-select" id="select" aria-label="Example select with button addon">
-                <option value="Choose" disabled selected>Choose region..</option>
+                <!-- <option value="Choose" disabled selected>Choose region..</option> -->
                 <option value="Africa">Africa</option>
                 <option value="Americas">Americas</option>
                 <option value="Asia">Asia</option>
@@ -21,8 +21,11 @@
                 <option value="Oceania">Oceania</option>
             </select>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">Button</button>
+              <button id="regionBtn" class="btn btn-outline-secondary" type="button">Show Region</button>
             </div>
+            <div class="input-group-append">
+                <button id="allBtn" class="btn btn-outline-secondary" type="button">All Countires</button>
+              </div>
           </div>
 
           <div class="row pt-4" id="display">
