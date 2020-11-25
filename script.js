@@ -78,20 +78,20 @@ allBtn.addEventListener('click', fetchAll);
      const response = await fetch(`https://restcountries.eu/rest/v2/name/${inputValue}`);
      const data = await response.json();
     //  console.log(data);
-    // 
-        
-        let option;
-        option = document.createElement('option');
-        console.log(option)
-     for(let i =0; i < data.length; i++) {
-            
-            option.value = data[i].name;    
-     }
-     countries.appendChild(option); 
- } catch (err) {
-     console.log('Error Bl:', err);
- }
-}
-
+         //setting datalist empty at the start of function 
+         //if we skip this step, same name will be repeated 
+            countries.innerHTML = '';
+            let option;
+             option = document.createElement('option');
+        // console.log(option)
+                
+            for(let i =0; i < data.length; i++) {
+                    option.value = data[i].name;    
+            }
+            countries.appendChild(option); 
+    } catch (err) {
+        console.log('Error Bl:', err);
+    }
+    }
 
 countryOption.addEventListener('keyup', fetchOptions, false);
