@@ -2,6 +2,9 @@ const display = document.getElementById('display');
 const selectRegion = document.getElementById('select');
 const regionBtn = document.getElementById('regionBtn');
 const allBtn = document.getElementById('allBtn');
+const countryOption = document.getElementById('countryOption');
+const countries = document.getElementById('countries');
+
 
 const fetchAll = async () => {
     await fetch("https://restcountries.eu/rest/v2/all?_limit=10")
@@ -64,3 +67,31 @@ allBtn.addEventListener('click', fetchAll);
  }
  regionBtn.addEventListener('click', fetchRegion);
 
+ let defaultOption = document.createElement('option');
+ defaultOption.text = 'Choose Country';
+ countries.appendChild(defaultOption);
+ countries.selectedIndex = 0;
+
+ const fetchOptions = async () => {
+     const inputValue = countryOption.value;
+     try {
+     const response = await fetch(`https://restcountries.eu/rest/v2/name/${inputValue}`);
+     const data = await response.json();
+    //  console.log(data);
+    // 
+        
+        let option;
+        option = document.createElement('option');
+        console.log(option)
+     for(let i =0; i < data.length; i++) {
+            
+            option.value = data[i].name;    
+     }
+     countries.appendChild(option); 
+ } catch (err) {
+     console.log('Error Bl:', err);
+ }
+}
+
+
+countryOption.addEventListener('keyup', fetchOptions, false);
