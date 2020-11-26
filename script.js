@@ -50,7 +50,8 @@ allBtn.addEventListener('click', fetchAll);
         const data = await response.json();
         console.log(data);
         const salys = data.map(salis => {
-     
+
+            
             return `<div class="col pb-2">
                     <div class="card" style="width: 18rem;">
                       <img src="${salis.flag}" width="200px" height="150px" class="card-img-top" alt="flag">
@@ -60,6 +61,7 @@ allBtn.addEventListener('click', fetchAll);
                      </div>
                     </div>
                     </div>`
+            
           }).join('');
           display.insertAdjacentHTML('afterbegin', salys);
      } catch (err) {
@@ -108,6 +110,7 @@ const fecthCounrty = async () => {
           console.log(salis);
           const div = document.createElement('div');
           div.setAttribute('class', 'jumbotron');
+          div.style.width = '50%';
           display.appendChild(div);
 
           const img = document.createElement('img');
@@ -120,23 +123,44 @@ const fecthCounrty = async () => {
           name.innerText = salis.name;
           div.appendChild(name);
 
+          const capital = document.createElement('h5');
+          capital.innerText = `Capital ${salis.capital}`;
+          capital.setAttribute('class', 'display-6');
+          div.appendChild(capital);
+
           const currencyList = document.createElement('ul');
           currencyList.innerText = 'currencies';
+          currencyList.setAttribute('class', 'list-group')
           div.appendChild(currencyList)
           for(let c in salis.currencies) {
             const currency = document.createElement('li')
+            currency.setAttribute('class', 'list-group-item')
             currency.innerHTML = salis.currencies[c].name;
             currencyList.appendChild(currency);
           }
 
           const borderList = document.createElement('ul');
           borderList.innerText = 'Border';
+          borderList.setAttribute('class', 'list-group');
           div.appendChild(borderList)
           for(let b in salis.borders) {
             const border = document.createElement('li')
+            border.setAttribute('class', 'list-group-item')
             border.innerHTML = salis.borders[b];
             borderList.appendChild(border);
           }
+          const translationList = document.createElement('ul');
+          translationList. innerText = 'Translations';
+          translationList.setAttribute('class', 'list-group');
+          div.appendChild(translationList);
+          for(let t in salis.translations) {
+            // console.log(salis.translations[t], t)
+            const li = document.createElement('li');
+            li.setAttribute('class', 'list-group-item');
+            li.innerHTML = `${t} : ${salis.translations[t]}`;
+            translationList.appendChild(li);
+          }
+
 
         })
         
